@@ -2,27 +2,37 @@
 $(function(){
     var listener = new window.keypress.Listener();
     var $act = $(".nav-button:first");
+    var $actside = $(".side:first");
     $act.parent().addClass("active");
+    $actside.parent().addClass("act").removeClass("noact");
     listener.simple_combo("up", function() {
         $act.parent().removeClass("active");
-        if($act.parent().prev().children(".nav-button").eq(0).is(".nav-button")){
-            $act.prev().addClass("active");
+        $actside.parent().addClass("noact").removeClass("act");
+        $act = $act.parent().prev().children(".nav-button").eq(0);
+        if($act.is(".nav-button")){
+            $actside = $actside.parent().prev().children(".side").eq(0);
         }
         else{
             $act = $(".nav-button:last");
-            $act.parent().addClass("active");
+            $actside = $(".side:last");
         }
+        $act.parent().addClass("active");
+        $actside.parent().addClass("act").removeClass("noact");
     });
 
     listener.simple_combo("down", function() {
         $act.parent().removeClass("active");
-        if($act.parent().next().children(".nav-button").eq(0).is(".nav-button")){
-            $act.parent().next().addClass("active");
+        $actside.parent().addClass("noact").removeClass("act");
+        $act = $act.parent().next().children(".nav-button").eq(0);
+        if($act.is(".nav-button")){
+            $actside = $actside.parent().next().children(".side").eq(0);
         }
         else{
             $act = $(".nav-button:first");
-            $act.parent().addClass("active");
+            $actside = $(".side:first");
         }
+        $act.parent().addClass("active");
+        $actside.parent().addClass("act").removeClass("noact");
     });
 });
 

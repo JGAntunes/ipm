@@ -1,9 +1,33 @@
-.nav>li>a{
+.nav>li>a, .nav>li{
 	height:60px;
+	max-height:60px;
 }
 
-.nav>li{
-	max-height:60px;
+.nav>li>a, .nav>li, .active{
+	-webkit-transition: all ease-in-out .3s; /* Safari and Chrome */
+    -moz-transition: all ease-in-out .3s; /* Firefox */
+    -ms-transition: all ease-in-out .3s; 
+    -o-transition: all ease-in-out .3s; /* Opera */
+    transition: all ease-in-out .3s;
+}
+
+.width {
+    height: auto;
+    -webkit-transition: width 2s ease-in-out, ;
+    -moz-transition: width 2s ease-in-out;
+    -o-transition: width 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    overflow: hidden;
+
+}
+
+.width.act{
+	opacity: 1;
+}
+
+.width.noact{
+	margin-left: -100%;
+	opacity: 0;
 }
 
 .mainicon{
@@ -12,6 +36,18 @@
 
 .smallpadding{
 	padding: 2px;
+}
+
+.background{
+	background-image: url(../imgs/maxresdefault.jpg);
+    background-size: cover;
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+html,body{
+	height: 100%;
 }
 
 .jumbotron{
