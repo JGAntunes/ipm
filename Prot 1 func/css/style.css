@@ -1,3 +1,30 @@
+.top-buffer{
+	margin-top: 60px;
+}
+
+.box{
+	background-color: rgba(0,0,0,0.5);
+	height: 100%;
+	width: 100%;
+}
+
+#helper{
+	width: auto;
+	border-radius: 5px;
+	display: inline-block;
+}
+
+#maintittle{
+	padding-left: 60px; 
+	border-bottom-right-radius: 5px;
+}
+
+#tittle{
+	padding-left: 60px; 
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
 .nav>li>a, .nav>li{
 	height:60px;
 	max-height:60px;
@@ -13,11 +40,25 @@
 
 .width {
     height: auto;
-    -webkit-transition: width 2s ease-in-out, ;
-    -moz-transition: width 2s ease-in-out;
-    -o-transition: width 2s ease-in-out;
-    transition: width 2s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
     overflow: hidden;
+
+}
+
+#headerfunc.width {
+    height: auto;
+    -webkit-transition: all .15s ease-in-out;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    overflow: hidden;
+
+}
+
+#headerfunc {
 
 }
 
@@ -54,3 +95,9 @@ html,body{
 	padding-left: 2px;
 	padding-right: 2px;
 }
+
+.col-md-8.jumbotron{
+	/*opacity: .4;*/
+	background-color: rgba(0,0,0,0.5);
+}
+

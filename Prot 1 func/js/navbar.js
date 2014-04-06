@@ -1,10 +1,33 @@
 
+function tittleChanger(msg) {
+    $("#tittle").children().on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+    function() {
+        $(this).html(msg);
+        $(this).addClass("act").removeClass("noact");
+    });
+    $("#tittle").children().addClass("noact").removeClass("act");
+}
+
 $(function(){
+
+    $("#msg").on("changeAct", function(){
+        tittleChanger("Mensagens");
+    });
+
+    $("#camara").on("changeAct", function(){
+        tittleChanger("Câmaras");
+    });
+
+    $("#persona").on("changeAct", function(){
+        tittleChanger("Personalização/ Avarias");
+    });
+
     var listener = new window.keypress.Listener();
     var $act = $(".nav-button:first");
     var $actside = $(".side:first");
     $act.parent().addClass("active");
     $actside.parent().addClass("act").removeClass("noact");
+
     listener.simple_combo("up", function() {
         $act.parent().removeClass("active");
         $actside.parent().addClass("noact").removeClass("act");
@@ -16,7 +39,7 @@ $(function(){
             $act = $(".nav-button:last");
             $actside = $(".side:last");
         }
-        $act.parent().addClass("active");
+        $act.parent().addClass("active").trigger("changeAct");
         $actside.parent().addClass("act").removeClass("noact");
     });
 
@@ -31,7 +54,7 @@ $(function(){
             $act = $(".nav-button:first");
             $actside = $(".side:first");
         }
-        $act.parent().addClass("active");
+        $act.parent().addClass("active").trigger("changeAct");
         $actside.parent().addClass("act").removeClass("noact");
     });
 });
