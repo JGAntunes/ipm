@@ -1,30 +1,106 @@
 
-function tittleChanger(msg) {
-    $("#tittle").children().on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+function tittleChanger(msg, help, txt) {
+    $("#headerfunc").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
     function() {
         $(this).html(msg);
         $(this).addClass("act").removeClass("noact");
     });
-    $("#tittle").children().addClass("noact").removeClass("act");
+    $("#helperfunc").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+    function() {
+        $(this).html(help);
+        $(this).addClass("act").removeClass("noact");
+    });
+    $("#mainwindow").children(".width").eq(0).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+    function() {
+        $(this).html(txt);
+        $(this).addClass("act").removeClass("noact");
+    });
+    $("#mainwindow").children(".width").eq(0).addClass("noact").removeClass("act");
+    $("#headerfunc").addClass("noact").removeClass("act");
+    $("#helperfunc").addClass("noact").removeClass("act");
 }
 
 $(function(){
 
+    var nomeUser ="<p>Sizenante Fonseca</p>"
+    var data = "<p>24/03/2230</p>"
+    var otherUser = "<p>Gilberto Fradique</p><p>XX-KK-00</p>"
+    var avisoTxt = "<p>Cuidado! Acabei de passar por uma operação stop.</p>"
+    var conviteTxt = "<p>Olá, não pude deixar de reparar em ti. Queres ir beber um café logo?</p>"
+    var criticaTxt = "<p>Não aceleres tanto nesta estrada.</p>"
+    var piropoTxt = "<p>Epah, pareces um helicóptero... Gira e boa!</p>"
+    var insultoTxt = "<p>Sai da frente oh palhaço!</p>"
+
     $("#msg").on("changeAct", function(){
-        tittleChanger("Mensagens");
+        tittleChanger("Mensagens", "Enviar e ver mensagens recebidas de outros utilizadores", "");
     });
 
     $("#camara").on("changeAct", function(){
-        tittleChanger("Câmaras");
+        tittleChanger("Câmaras", "Ver, tirar fotos e muito mais usando as câmaras dos passageiros", "");
     });
 
     $("#persona").on("changeAct", function(){
-        tittleChanger("Personalização/ Avarias");
+        tittleChanger("Personalização/ Avarias", "Personalizar o seu carro e verificar as avarias registadas", "");
+    });
+
+    $("#caixa").on("changeAct", function(){
+        tittleChanger("Caixa de entrada", "Ver e responder a mensagens recebidas", "");
+    });
+
+    $("#enviar").on("changeAct", function(){
+        tittleChanger("Enviar mensagem", "Enviar uma mensagem para um utilizador", "");
+    });
+
+    $("#home").on("changeAct", function(){
+        tittleChanger("Menu principal", "Voltar ao menu principal", "");
+    });
+
+    $("#aviso").on("changeAct", function(){
+        tittleChanger("Avisos", "Mensagens de aviso relacionadas com a condução", "<h4> Exemplos: </h4>" + avisoTxt);
+    });
+    $("#convite").on("changeAct", function(){
+        tittleChanger("Convites", "Convites para sair ou outras actividades", "<h4> Exemplos: </h4>" + conviteTxt);
+    });
+
+    $("#critica").on("changeAct", function(){
+        tittleChanger("Críticas", "Criticas boas/más relaccionadas com a condução alheia", "<h4> Exemplos: </h4>" + criticaTxt);
+    });
+
+    $("#piropo").on("changeAct", function(){
+        tittleChanger("Piropos", "Piropos diversificados e que, com sorte, terão impacto certo!", "<h4> Exemplos: </h4>" + piropoTxt);
+    });
+
+    $("#insulto").on("changeAct", function(){
+        tittleChanger("Insultos", "Insultos diversificados que farão qualquer condutor pensar 2 vezes ao olhar para si novamente", "<h4> Exemplos: </h4>" + insultoTxt);
+    });
+
+    $("#aviso1").on("changeAct", function(){
+        tittleChanger("1 / 1", "Mensagem pré-definida de aviso - 1", "<h4> Mensagem: </h4>" + avisoTxt + nomeUser + data);
+    });
+    $("#convite1").on("changeAct", function(){
+        tittleChanger("1 / 1", "Mensagem pré-definida de convite - 1", "<h4> Mensagem: </h4>" + conviteTxt + nomeUser + data);
+    });
+
+    $("#critica1").on("changeAct", function(){
+        tittleChanger("1 / 1", "Mensagem pré-definida de critica - 1", "<h4> Mensagem: </h4>" + criticaTxt + nomeUser + data);
+    });
+
+    $("#piropo1").on("changeAct", function(){
+        tittleChanger("1 / 1", "Mensagem pré-definida de piropo - 1", "<h4> Mensagem: </h4>" + piropoTxt + nomeUser + data);
+    });
+
+    $("#insulto1").on("changeAct", function(){
+        tittleChanger("1 / 1", "Mensagem pré-definida de insulto - 1", "<h4> Mensagem: </h4>" + insultoTxt + nomeUser + data);
+    });
+
+    $("#user1").on("changeAct", function(){
+        tittleChanger("1 / 1", "Utilizador Seleccionado - 1", "<h4> Utilizador: </h4>" + otherUser);
     });
 
     var listener = new window.keypress.Listener();
     var $act = $(".nav-button:first");
     var $actside = $(".side:first");
+    var $prev = "index.html"
     $act.parent().addClass("active");
     $actside.parent().addClass("act").removeClass("noact");
 
@@ -56,6 +132,25 @@ $(function(){
         }
         $act.parent().addClass("active").trigger("changeAct");
         $actside.parent().addClass("act").removeClass("noact");
+    });
+
+    listener.simple_combo("right", function() {
+        if(document.URL.match(/[^\/]+$/)[0] == "agree.html"){
+            tittleChanger("Enviada", "Mensagem enviada com sucesso!", "");
+            setTimeout(function(){
+                window.open("mensagens.html", "_self");
+                window.location.replace("index.html");
+        }, 2000);
+        }
+        else{
+            window.open($act.attr("href"), "_self");
+        }
+    });
+
+    listener.simple_combo("left", function() {
+        if(document.URL.match(/[^\/]+$/)[0] != "index.html"){
+            window.history.back();
+        }
     });
 });
 
