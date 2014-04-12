@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IPM prot 1 func</title>
+    <title>IPM prot</title>
 	
 	<script src="js/jquery-2.1.0.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -24,68 +24,82 @@
   </head>
   <body>
   	<div class="background">
-	  	<div class="row">
-	  		<div class="col-md-3 container">
-	  			<div class="row">
-	  				<div class="col-md-12 box" id="maintittle">
-	  					<h1 class= "width act maintext">Mensagens<br> <small>Temas</small></h1>
-	  				</div>
-	  			</div>
-	  			<div class="row top-buffer">
-	  				<div class="col-md-1 box" id="tittle">
-		  				<h3 class= "width act maintext" id="headerfunc">Avisos</h3>
+	  	<div class="container-fluid">
+		  	<div class="row">
+		  		<div class="col-md-3">
+		  			<div class="row">
+		  				<div class="col-md-12 box" id="maintittle">
+		  					<h1 class= "width act maintext">Mensagens<br> <small>Temas</small></h1>
+		  				</div>
 		  			</div>
-	  			</div>
-	  			<div class="row">
-	  				<div class="col-md-8 jumbotron smallpadding">
-					    <nav class="nav nav-pills nav-stacked nav-fixed-left text-center" role="navigation">
-					    	<li id="aviso"><a class="nav-button" href="avisos.html"><span class="mainicon glyphicon glyphicon-exclamation-sign"></span></a></li>
-						    <li id="convite"><a class="nav-button" href="convites.html"><span class="mainicon glyphicon glyphicon-cutlery"></span></a></li>
-						    <li id="critica"><a class="nav-button" href="criticas.html"><span class="mainicon glyphicon glyphicon-road"></span></a></li>
-							<li id="piropo"><a class="nav-button" href="piropos.html"><span class="mainicon glyphicon glyphicon-eye-close"></span></a></li>
-							<li id="insulto"><a class="nav-button" href="insultos.html"><span class="mainicon glyphicon glyphicon-thumbs-down"></span></a></li>
-							<li id="home"><a class="nav-button" href="index.html"><span class="mainicon glyphicon glyphicon-home"></span></a></li>
-					    </nav>
-					</div>
-					<div class="col-md-4 smallpadding">
-						<ul class="nav nav-pills nav-stacked nav-fixed-left text-left">
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-						</ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-md-9 container">
-	  			<div class="row">
-	  				<div class="col-md-5 col-md-offset-1 box smallpadding" id="helper">
-	  					<h4 class="maintext width act" id="helperfunc">Mensagens de aviso relacionadas com a condução</h4>
-	  				</div>
-	  			</div>
-	  			<div class="row top-buffer-main">
-	  				<div class="col-md-5 col-md-offset-7 jumbotron smallpadding" id="mainwindow">
-	  					<div class="width act" id="maintext">
-	  						<h4> Exemplos: </h4>
-	  						<p>Cuidado! Acabei de passar por uma operação stop.</p>
-	  					</div>
-	  				</div>
-	  			</div>
-	  		</div>
+		  			<div class="row top-buffer">
+		  				<div class="col-md-1 box" id="tittle">
+			  				<h3 class= "width act maintext" id="headerfunc">Avisos</h3>
+			  			</div>
+		  			</div>
+		  			<div class="row">
+		  				<div id="sidebar" class="col-md-8 box smallpadding">
+						    <nav class="nav nav-pills nav-stacked nav-fixed-left text-center" role="navigation">
+						    	<li class="left-menu" data-msg="Avisos" data-help="Mensagens de aviso relacionadas com a condução" data-txt="<h4> Exemplos: </h4><p>Cuidado! Acabei de passar por uma operação stop.</p>">
+						    		<a class="nav-button" href="avisos.html"><span class="mainicon glyphicon glyphicon-exclamation-sign"></span></a>
+						    	</li >
+							    <li class="left-menu" data-msg="Convites" data-help="Convites para sair ou outras actividades" data-txt="<h4> Exemplos: </h4><p>Olá, não pude deixar de reparar em ti. Queres ir beber um café logo?</p>">
+							    	<a class="nav-button" href="convites.html"><span class="mainicon glyphicon glyphicon-cutlery"></span></a>
+							    </li>
+							    <li class="left-menu" data-msg="Críticas" data-help="Criticas boas/más relaccionadas com a condução alheia" data-txt="<h4> Exemplos: </h4><p>Não aceleres tanto nesta estrada.</p>">
+							    	<a class="nav-button" href="criticas.html"><span class="mainicon glyphicon glyphicon-road"></span></a>
+							    </li>
+								<li class="left-menu" data-msg="Piropos" data-help="Piropos diversificados e que, com sorte, terão impacto certo!" data-txt="<h4> Exemplos: </h4><p>Epah, pareces um helicóptero... Gira e boa!</p>">
+									<a class="nav-button" href="piropos.html"><span class="mainicon glyphicon glyphicon-eye-close"></span></a>
+								</li>
+								<li class="left-menu" data-msg="Insultos" data-help="Insultos diversificados que farão qualquer condutor pensar 2 vezes ao olhar para si novamente" data-txt="<h4> Exemplos: </h4><p>Sai da frente oh palhaço!</p>">
+									<a class="nav-button" href="insultos.html"><span class="mainicon glyphicon glyphicon-thumbs-down"></span></a>
+								</li>
+								<li class="left-menu" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="">
+									<a class="nav-button" href="index.html"><span class="mainicon glyphicon glyphicon-home"></span></a>
+								</li>
+						    </nav>
+						</div>
+						<div class="col-md-4 padding2">
+							<ul class="nav nav-pills nav-stacked nav-fixed-left text-left">
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+							</ul>
+						</div>
+		  			</div>
+		  		</div>
+		  		<div class="col-md-9">
+		  			<div class="row">
+		  				<div class="col-md-5 col-md-offset-1 box smallpadding" id="helper">
+		  					<h4 class="maintext width act" id="helperfunc">Mensagens de aviso relacionadas com a condução</h4>
+		  				</div>
+		  			</div>
+		  			<div class="row top-buffer-main">
+		  				<div class="col-md-5 pull-right box smallpadding" id="mainwindow">
+		  					<div class="width act" id="maintext">
+		  						<h4> Exemplos: </h4>
+		  						<p>Cuidado! Acabei de passar por uma operação stop.</p>
+		  					</div>
+		  				</div>
+		  			</div>
+		  		</div>
+			</div>
 		</div>
 	</div>
   </body>

@@ -24,8 +24,13 @@
 	/*display: inline-block;*/
 }
 
+#sidebar{
+	border-bottom-right-radius: 5px;
+}
+
 #mainwindow{
 	height: 300px;
+	font-size: 16px;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
@@ -61,7 +66,6 @@
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     overflow: hidden;
-
 }
 
 #headerfunc.width, #helperfunc.width, #maintext.width {
@@ -70,10 +74,6 @@
     -o-transition: all .15s ease-in-out;
     transition: all .15s ease-in-out;
     overflow: hidden;
-
-}
-
-#headerfunc {
 
 }
 
@@ -101,6 +101,10 @@
 }
 
 .smallpadding{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.padding2{
 	padding: 2px;
 }
 
@@ -114,18 +118,4 @@
 
 html,body{
 	height: 100%;
-}
-
-.jumbotron{
-	padding-left: 2px;
-	padding-right: 2px;
-	/*opacity: .4;*/
-	background-color: rgba(220,220,220,0.6);
-}
-
-.maintext{
-}
-
-.regtext{
-	/*font-size: 120%;*/
 }

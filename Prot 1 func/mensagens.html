@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IPM prot 1 func</title>
+    <title>IPM prot</title>
 	
 	<script src="js/jquery-2.1.0.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -24,48 +24,56 @@
   </head>
   <body>
   	<div class="background">
-	  	<div class="row">
-	  		<div class="col-md-3 container">
-	  			<div class="row">
-	  				<div class="col-md-12 box" id="maintittle">
-	  					<h1 class= "width act maintext">Mensagens <br> <small></small></h1>
-	  				</div>
-	  			</div>
-	  			<div class="row top-buffer">
-	  				<div class="col-md-1 box" id="tittle">
-		  				<h3 class= "width act maintext" id="headerfunc">Caixa de entrada</h3>
+  		<div class="container-fluid">
+		  	<div class="row">
+		  		<div class="col-md-3">
+		  			<div class="row">
+		  				<div class="col-md-12 box" id="maintittle">
+		  					<h1 class= "width act maintext">Mensagens <br> <small></small></h1>
+		  				</div>
 		  			</div>
-	  			</div>
-	  			<div class="row">
-	  				<div class="col-md-8 jumbotron smallpadding">
-					    <nav class="nav nav-pills nav-stacked nav-fixed-left text-center" role="navigation">
-						    <li id="caixa"><a class="nav-button" href="#"><span class="mainicon glyphicon glyphicon-inbox"></span></a></li>
-							<li id="enviar"><a class="nav-button" href="temas.html"><span class="mainicon glyphicon glyphicon-upload"></span></a></li>
-							<li id="home"><a class="nav-button" href="index.html"><span class="mainicon glyphicon glyphicon-home"></span></a></li>
-					    </nav>
-					</div>
-					<div class="col-md-4 smallpadding">
-						<ul class="nav nav-pills nav-stacked nav-fixed-left text-left">
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-							<li class="noact width">
-								<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></bloackquote>
-							</li>
-						</ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-md-9 container">
-	  			<div class="row">
-	  				<div class="col-md-5 col-md-offset-1 box smallpadding" id="helper">
-	  					<h4 class="maintext width act" id="helperfunc">Ver e responder a mensagens recebidas</h4>
-	  				</div>
-	  			</div>
-	  		</div>
+		  			<div class="row top-buffer">
+		  				<div class="col-md-1 box" id="tittle">
+			  				<h3 class= "width act maintext" id="headerfunc">Caixa de entrada</h3>
+			  			</div>
+		  			</div>
+		  			<div class="row">
+		  				<div id="sidebar" class="col-md-8 box smallpadding">
+						    <nav class="nav nav-pills nav-stacked nav-fixed-left text-center" role="navigation">
+							    <li class="left-menu" data-msg="Caixa de entrada" data-help="Ver e responder a mensagens recebidas" data-txt="">
+							    	<a class="nav-button" href="entrada.html"><span class="mainicon glyphicon glyphicon-inbox"></span></a>
+							    </li>
+								<li class="left-menu" data-msg="Enviar mensagem" data-help="Enviar uma mensagem para um utilizador" data-txt="">
+									<a class="nav-button" href="temas.html"><span class="mainicon glyphicon glyphicon-upload"></span></a>
+								</li>
+								<li class="left-menu" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="">
+									<a class="nav-button" href="index.html"><span class="mainicon glyphicon glyphicon-home"></span></a>
+								</li>
+						    </nav>
+						</div>
+						<div class="col-md-4 padding2">
+							<ul class="nav nav-pills nav-stacked nav-fixed-left text-left">
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+								<li class="noact width">
+									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
+								</li>
+							</ul>
+						</div>
+		  			</div>
+		  		</div>
+		  		<div class="col-md-9">
+		  			<div class="row">
+		  				<div class="col-md-5 col-md-offset-1 box smallpadding" id="helper">
+		  					<h4 class="maintext width act" id="helperfunc">Ver e responder a mensagens recebidas</h4>
+		  				</div>
+		  			</div>
+		  		</div>
+			</div>
 		</div>
 	</div>
   </body>
