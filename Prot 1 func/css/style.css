@@ -116,6 +116,15 @@
     height: 100%;
 }
 
+.img{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	vertical-align: top;
+
+	height: inherit;
+	width: inherit;
+}
+
 html,body{
 	height: 100%;
 }
