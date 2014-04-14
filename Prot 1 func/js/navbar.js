@@ -10,12 +10,12 @@ function tittleChanger(msg, help, txt) {
         $(this).html(help);
         $(this).addClass("act").removeClass("noact");
     });
-    $("#mainwindow").children(".width").eq(0).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+    $("#maintext").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
     function() {
         $(this).html(txt);
         $(this).addClass("act").removeClass("noact");
     });
-    $("#mainwindow").children(".width").eq(0).addClass("noact").removeClass("act");
+    $("#maintext").addClass("noact").removeClass("act");
     $("#headerfunc").addClass("noact").removeClass("act");
     $("#helperfunc").addClass("noact").removeClass("act");
 }
@@ -47,7 +47,7 @@ $(function(){
             help = $("li.unread").length + ' mensagens novas, ' + $("li.read").length + ' mensagens lidas';
             txt = $(this).data('txt');
         }
-        else if($(this).hasClass("msgop")){
+        else if($(this).hasClass("usestore")){
             msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.msgAct;
         }
         else{
