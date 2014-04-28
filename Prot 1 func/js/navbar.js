@@ -35,7 +35,7 @@ $(function(){
     sessionStorage.user = "Sizenante Fonseca";
 
     $(".left-menu").on("changeAct", function(){
-        var msg, help, txt;
+        var msg, help, txt, otherTxt;
         if($(this).hasClass("msgli")){
             if($(this).hasClass("read")){
                 msg = "lida";
@@ -50,12 +50,18 @@ $(function(){
         else if($(this).hasClass("usestore")){
             msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.msgAct;
         }
+        else if($(this).hasClass("usestore2")){
+            msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.otherTxt;
+        }
         else{
             msg = $(this).data('msg'), help = $(this).data('help'), txt = $(this).data('txt');
         }
         if($(this).hasClass("store")){
+            otherTxt = $(this).data('txt2');
             sessionStorage.msgAct = txt;
-
+            if(otherTxt != undefined){
+                sessionStorage.otherTxt = otherTxt;
+            } 
         }
         tittleChanger(msg, help, txt);
     });
