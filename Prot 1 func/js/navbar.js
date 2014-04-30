@@ -22,7 +22,6 @@ function tittleChanger(msg, help, txt) {
 
 $(function(){
 
-
 /*    var nomeUser ="<p>Sizenante Fonseca</p>"
     var data = "<p>24/03/2230</p>"
     var otherUser = "<p>Gilberto Fradique</p><p>XX-KK-00</p>"
@@ -33,6 +32,22 @@ $(function(){
     var insultoTxt = "<p>Sai da frente oh palhaço!</p>"*/
     var msgTimer;
     sessionStorage.user = "Sizenante Fonseca";
+
+    if($(".progress-bar") !== undefined){
+        $(".progress-bar").animate({ width: "100%" }, {duration: 2000, complete: function() {
+            setTimeout(function(){
+                $(".on-complete").css("visibility", "visible");
+                $("#user").css({opacity: 1.0}).animate({opacity: 0}, 150).css({visibility: "hidden"});
+                $("#user").empty().addClass("usermain").animate({opacity: 1.0, visibility: "visible"}, 150);
+                tittleChanger(null, "Bem-vindo " + sessionStorage.user + "!", null);
+            }, 700);
+            setTimeout(function (){
+                window.open("index.html", "_self");
+                window.location.replace("index.html");
+            }, 3000);
+        }} );
+    }
+
 
     $(".left-menu").on("changeAct", function(){
         var msg, help, txt, otherTxt;

@@ -64,7 +64,7 @@
     transition: all ease-in-out .3s;
 }
 
-.width {
+.width{
     height: auto;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -73,7 +73,7 @@
     overflow: hidden;
 }
 
-#headerfunc.width, #helperfunc.width, #maintext.width {
+#headerfunc.width, #helperfunc.width, #maintext.width{
     -webkit-transition: all .15s ease-in-out;
     -moz-transition: all .15s ease-in-out;
     -o-transition: all .15s ease-in-out;
@@ -89,6 +89,11 @@
 
 #maintext.width.noact{
 	margin-left: 200%;
+}
+
+.maincenter{
+	border-radius: 5px;
+	height: 200px;
 }
 
 .width.act{
@@ -120,11 +125,12 @@
 }
 
 .background{
-	background-image: url(../imgs/background2.jpg);
+	background-image: url(../imgs/background4.jpg);
     background-size: cover;
     background-position: 100% 40%;
     background-repeat: no-repeat;
     height: 100%;
+    width:100%;
 }
 
 .icon{
@@ -136,6 +142,28 @@
 	width: 100%;
 }
 
+.usermain{
+	background-image: url(../imgs/users/sizenante_fonseca.jpg);
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 40%;
+	width: 100%;
+}
+
+#user{
+	height: 90px;
+	width: 100%;
+}
+
+.mainimage{
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 100%;
+	opacity: 0.8;
+}
 .img{
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -150,6 +178,10 @@
 	border-top: 0;
 }
 
-html,body{
+.progress{
+	margin-top: 5px;
+}
+
+html, body, .imagefield{
 	height: 100%;
 }
