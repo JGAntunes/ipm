@@ -20,6 +20,53 @@ function tittleChanger(msg, help, txt) {
     $("#helperfunc").addClass("noact").removeClass("act");
 }
 
+function scroller($act, $fixedPos, $movingPos, id){
+
+    var otherId;
+    var arrow;
+
+    if(id === "top-elem"){
+        otherId = "bottom-elem";
+        arrow = "bottom-arrow";
+    }
+    else{
+        otherId = "top-elem";
+        arrow = "top-arrow";
+    }
+
+    console.log("Bottom reached, start scroll");
+
+    if(!($fixedPos.length)){
+        console.log($fixedPos);
+        $("#"+arrow).css("visibility", "visible");
+        if(id === "top-elem"){
+            $fixedPos = $(".nav-button").last();
+        }
+        else{
+            $fixedPos = $(".nav-button").first();
+        }
+    }
+    else{
+        $("#"+otherId).removeAttr("id");
+    }
+    $fixedPos.attr("id", otherId);
+    $fixedPos.parent().animate({
+        opacity : "0"},
+        30, function(){
+            $fixedPos.parent().animate({height: "0"}, 45, null);
+        });
+    $act.parent().animate({
+        height  : "60px"},
+        30, function() {
+            $act.parent().animate({opacity : "1"}, 45, null);
+            $act.removeAttr('id');
+            if($movingPos.is(".nav-button")){
+                $movingPos.attr("id",id);
+            }
+            console.log($fixedPos);
+    });
+}
+
 $(function(){
 
 /*    var nomeUser ="<p>Sizenante Fonseca</p>"
@@ -32,19 +79,22 @@ $(function(){
     var insultoTxt = "<p>Sai da frente oh palhaço!</p>"*/
     var msgTimer;
     sessionStorage.user = "Sizenante Fonseca";
+    sessionStorage.parts = "<p>Performance:<br>Motor - <span id='motor'>normal</span>;<br>Suspensão - <span id='suspension'>normal</span>;</p><br><p>Conforto:<br>Assentos - <span id='seat-number'>4</span>, <span id='seat-fabric'>sintécticos</span>;<br>Vidros - <span id='glass-transparency'>transparência normal</span>, <span id='glass-color'>incolor</span>;</p>";
+    console.log(sessionStorage.getItem("parts"));
+    sessionStorage.predefparts = sessionStorage.parts;
 
     if($(".progress-bar") !== undefined){
-        $(".progress-bar").animate({ width: "100%" }, {duration: 2000, complete: function() {
+        $(".progress-bar").animate({ width: "100%" }, {duration: 5000, complete: function() {
             setTimeout(function(){
                 $(".on-complete").css("visibility", "visible");
                 $("#user").css({opacity: 1.0}).animate({opacity: 0}, 150).css({visibility: "hidden"});
                 $("#user").empty().addClass("usermain").animate({opacity: 1.0, visibility: "visible"}, 150);
                 tittleChanger(null, "Bem-vindo " + sessionStorage.user + "!", null);
-            }, 700);
+            }, 1000);
             setTimeout(function (){
                 window.open("index.html", "_self");
                 window.location.replace("index.html");
-            }, 3000);
+            }, 5000);
         }} );
     }
 
@@ -68,6 +118,9 @@ $(function(){
         else if($(this).hasClass("usestore2")){
             msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.otherTxt;
         }
+        else if($(this).hasClass("usestore3")){
+            msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.parts;
+        }
         else{
             msg = $(this).data('msg'), help = $(this).data('help'), txt = $(this).data('txt');
         }
@@ -78,6 +131,12 @@ $(function(){
                 sessionStorage.otherTxt = otherTxt;
             } 
         }
+        /*if($(this).hasClass("store2")){
+            console.log($(this).data('txt'));
+            console.log($(this).data('msg'));
+            $("'"+$(this).data('txt')+"'").html($(this).data('msg'));
+            msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.parts = $('#maintext').html();
+        }*/
         tittleChanger(msg, help, txt);
     });
 
@@ -92,8 +151,10 @@ $(function(){
 
 
     var listener = new window.keypress.Listener();
+    var $nextAct;
     var $act = $(".nav-button:first");
     var $actside = $(".side:first");
+    var top = 0;
 
     if(document.URL.match(/[^\/]+$/)[0] == "agree.html"){
         setTimeout(function(){
@@ -112,13 +173,24 @@ $(function(){
         clearTimeout(msgTimer);
         $act.parent().removeClass("active");
         $actside.parent().addClass("noact").removeClass("act");
-        $act = $act.parent().prev().children(".nav-button").eq(0);
-        if($act.is(".nav-button")){
+        $nextAct = $act.parent().prev().children(".nav-button").eq(0);
+
+        if($nextAct.is("#top-elem")){
+            $act = $nextAct;
+            scroller($act, $("#bottom-elem").parent().prev().children(".nav-button").eq(0), $act.parent().prev().children(".nav-button").eq(0), "top-elem");
+        }
+
+        else if($nextAct.is(".nav-button")){
+            $act = $nextAct;
             $actside = $actside.parent().prev().children(".side").eq(0);
         }
-        else{
+        else if(!($(".roll-scroll").length)){
+            $act = $nextAct;
             $act = $(".nav-button:last");
             $actside = $(".side:last");
+        }
+        if(!($nextAct.parent().prev().children(".nav-button").eq(0).length)){
+            $("#top-arrow").css("visibility", "hidden");
         }
         $act.parent().addClass("active").trigger("changeAct");
         $actside.parent().addClass("act").removeClass("noact");
@@ -128,13 +200,25 @@ $(function(){
         clearTimeout(msgTimer);
         $act.parent().removeClass("active");
         $actside.parent().addClass("noact").removeClass("act");
-        $act = $act.parent().next().children(".nav-button").eq(0);
-        if($act.is(".nav-button")){
+        $nextAct = $act.parent().next().children(".nav-button").eq(0);
+
+        if($nextAct.is("#bottom-elem")){
+            $act = $nextAct;
+            scroller($act, $("#top-elem").parent().next().children(".nav-button").eq(0), $act.parent().next().children(".nav-button").eq(0), "bottom-elem");
+        }
+
+        else if($nextAct.is(".nav-button")){
+            $act = $nextAct;
             $actside = $actside.parent().next().children(".side").eq(0);
         }
-        else{
+        else if(!($(".roll-scroll").length)){
+            $act = $nextAct;
             $act = $(".nav-button:first");
             $actside = $(".side:first");
+        }
+        console.log($("#bottom-elem"));
+        if(!($nextAct.parent().next().children(".nav-button").eq(0).length)){
+            $("#bottom-arrow").css("visibility", "hidden");
         }
         $act.parent().addClass("active").trigger("changeAct");
         $actside.parent().addClass("act").removeClass("noact");
