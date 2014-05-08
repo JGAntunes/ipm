@@ -19,7 +19,7 @@
     //"password": "password",
     //"port": "22",
     
-    "remote_path": "/afs/.ist.utl.pt/users/9/3/ist175993/web/IPM",
+    "remote_path": "/afs/.ist.utl.pt/users/9/3/ist175993/desktop/IPM",
     "ignore_regexes": [
         "\\.sublime-(project|workspace)", "sftp-config(-alt\\d?)?\\.json",
         "sftp-settings\\.json", "/venv/", "\\.svn/", "\\.hg/", "\\.git/",

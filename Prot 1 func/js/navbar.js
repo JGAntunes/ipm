@@ -78,11 +78,6 @@ $(function(){
     var piropoTxt = "<p>Epah, pareces um helicóptero... Gira e boa!</p>"
     var insultoTxt = "<p>Sai da frente oh palhaço!</p>"*/
     var msgTimer;
-    sessionStorage.user = "Sizenante Fonseca";
-    sessionStorage.parts = "<p>Performance:<br>Motor - <span id='motor'>normal</span>;<br>Suspensão - <span id='suspension'>normal</span>;</p><br><p>Conforto:<br>Assentos - <span id='seat-number'>4</span>, <span id='seat-fabric'>sintécticos</span>;<br>Vidros - <span id='glass-transparency'>transparência normal</span>, <span id='glass-color'>incolor</span>;</p>";
-    console.log(sessionStorage.getItem("parts"));
-    sessionStorage.predefparts = sessionStorage.parts;
-
     if($(".progress-bar") !== undefined){
         $(".progress-bar").animate({ width: "100%" }, {duration: 5000, complete: function() {
             setTimeout(function(){
@@ -118,8 +113,8 @@ $(function(){
         else if($(this).hasClass("usestore2")){
             msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.otherTxt;
         }
-        else if($(this).hasClass("usestore3")){
-            msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.parts;
+        else if($(this).hasClass("usestore-persona")){
+            msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.getItem(sessionStorage.areaPersona);
         }
         else{
             msg = $(this).data('msg'), help = $(this).data('help'), txt = $(this).data('txt');
@@ -131,12 +126,13 @@ $(function(){
                 sessionStorage.otherTxt = otherTxt;
             } 
         }
-        /*if($(this).hasClass("store2")){
-            console.log($(this).data('txt'));
-            console.log($(this).data('msg'));
-            $("'"+$(this).data('txt')+"'").html($(this).data('msg'));
-            msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.parts = $('#maintext').html();
-        }*/
+        else if($(this).hasClass("store-persona")){
+            var $persona  = $($.parseHTML(sessionStorage.getItem(sessionStorage.areaPersona)));
+            console.log($persona.html());
+            $persona.find($(this).data('txt')).html("<b>" + $(this).data('msg') + "</b>");
+            console.log($persona.html());
+            msg = $(this).data('msg'), help = $(this).data('help'), txt = $persona.html();
+        }
         tittleChanger(msg, help, txt);
     });
 
