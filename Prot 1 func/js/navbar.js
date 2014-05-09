@@ -15,9 +15,16 @@ function tittleChanger(msg, help, txt) {
         $(this).html(txt);
         $(this).addClass("act").removeClass("noact");
     });
-    $("#maintext").addClass("noact").removeClass("act");
-    $("#headerfunc").addClass("noact").removeClass("act");
-    $("#helperfunc").addClass("noact").removeClass("act");
+    txt = txt.replace(/'/g, "\"");
+    console.log(txt);
+    console.log($("#maintext").html());
+    if($("#maintext").html() != txt){ $("#maintext").addClass("noact").removeClass("act")};
+    console.log(msg);
+    console.log($("#headerfunc").html());
+    if($("#headerfunc").html() != msg){ $("#headerfunc").addClass("noact").removeClass("act")};
+    console.log(help);
+    console.log($("#helperfunc").html());
+    if($("#helperfunc").html() != help){ $("#helperfunc").addClass("noact").removeClass("act")};
 }
 
 function scroller($act, $fixedPos, $movingPos, id){
@@ -67,6 +74,7 @@ function scroller($act, $fixedPos, $movingPos, id){
     });
 }
 
+
 $(function(){
 
 /*    var nomeUser ="<p>Sizenante Fonseca</p>"
@@ -114,7 +122,21 @@ $(function(){
             msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.otherTxt;
         }
         else if($(this).hasClass("usestore-persona")){
-            msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.getItem(sessionStorage.areaPersona);
+            if($(this).attr("id") === "factory"){
+                sessionStorage.performance = sessionStorage.predefperformance;
+                sessionStorage.confort = sessionStorage.predefconfort;
+                sessionStorage.parts = sessionStorage.predefparts;
+                msg = $(this).data('msg'), help = $(this).data('help'), txt ="<p><b>Definições de fábrica:</b><br></p>" + sessionStorage.parts;
+            }
+            else if(($(this).attr("id") === "pre") && sessionStorage.partsPrev !== undefined){
+                sessionStorage.performance = sessionStorage.partsPrev;
+                sessionStorage.confort = sessionStorage.performancePrev;
+                sessionStorage.parts = sessionStorage.confortPrev;
+                msg = $(this).data('msg'), help = $(this).data('help'), txt ="<p><b>Definições de anteriores:</b><br></p>" + sessionStorage.parts;
+            }
+            else{
+                msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.getItem(sessionStorage.areaPersona);
+            }
         }
         else{
             msg = $(this).data('msg'), help = $(this).data('help'), txt = $(this).data('txt');
@@ -126,14 +148,20 @@ $(function(){
                 sessionStorage.otherTxt = otherTxt;
             } 
         }
+        else if($(this).hasClass("store-confirm")){
+            sessionStorage.confirm = $(this).data('confirm');
+        }
         else if($(this).hasClass("store-persona")){
-            var $persona  = $($.parseHTML(sessionStorage.getItem(sessionStorage.areaPersona)));
-            console.log($persona.html());
+            console.log(sessionStorage.areaPersona);
+            var $persona  = $($.parseHTML("<div>" + sessionStorage.getItem(sessionStorage.areaPersona) + "</div>"));
+            console.log(sessionStorage.getItem(sessionStorage.areaPersona));
             $persona.find($(this).data('txt')).html("<b>" + $(this).data('msg') + "</b>");
             console.log($persona.html());
             msg = $(this).data('msg'), help = $(this).data('help'), txt = $persona.html();
         }
-        tittleChanger(msg, help, txt);
+        if( msg !== undefined && help !== undefined && txt !== undefined){
+            tittleChanger(msg, help, txt);
+        }
     });
 
     $(".unread").on("changeAct", function(){
@@ -154,7 +182,7 @@ $(function(){
 
     if(document.URL.match(/[^\/]+$/)[0] == "agree.html"){
         setTimeout(function(){
-            tittleChanger($(this).data('msg'), $(this).data('help'), sessionStorage.msgAct);
+            tittleChanger(sessionStorage.confirm, $(this).data('help'), sessionStorage.msgAct);
         },100);
     }
 
@@ -223,11 +251,58 @@ $(function(){
     listener.simple_combo("right", function() {
         clearTimeout(msgTimer);
         if(document.URL.match(/[^\/]+$/)[0] == "agree.html"){
-            tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
-            setTimeout(function(){
-                window.open("mensagens.html", "_self");
-                window.location.replace("index.html");
-        }, 2000);
+            console.log($(".active").attr("id"));
+            if($(".active").attr("id") === "sim"){
+                tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
+                $(".nav").hide();
+                $("#mainwindow").hide();
+                setTimeout(function(){
+                    window.open("index.html", "_self");
+                    window.location.replace("index.html");
+                }, 2000);
+            }
+            else{
+                window.history.back();
+            }
+        }
+        else if(document.URL.match(/[^\/]+$/)[0] == "video.html"){
+            var video = document.getElementById("video");
+            if($(".active").attr("id") === "play"){
+                $(".glyphicon-play").addClass("glyphicon-pause").removeClass("glyphicon-play");
+                $(".active").attr("id", "pause");
+                //$("#video").css("opacity", "1");
+                tittleChanger("Pausa","Parar o vídeo no momento em questão", sessionStorage.msgAct);
+                video.play();
+            }
+            else if($(".active").attr("id") === "pause"){
+                $(".glyphicon-pause").addClass("glyphicon-play").removeClass("glyphicon-pause");
+                $(".active").attr("id", "play");
+                $("#video").css("opacity", "0.6");
+                tittleChanger("Reproduzir","Reproduzir o vídeo", sessionStorage.msgAct);
+                video.pause();
+            }
+            else if($(".active").attr("id") === "stop"){
+                $(".glyphicon-pause").addClass("glyphicon-play").removeClass("glyphicon-pause");
+                $("#play").attr("id", "pause");
+                $("#video").css("opacity", "0.6");
+                video.pause();
+                video.currentTime = 0;
+            }
+            else{
+                window.open($act.attr("href"), "_self");
+            }
+        }
+        else if($(".active").hasClass("persona")){
+            if(sessionStorage.personaAlt == "false"){
+                sessionStorage.personaAlt = "true";
+                sessionStorage.partsPrev =  sessionStorage.parts;
+                sessionStorage.performancePrev = sessionStorage.performance;
+                sessionStorage.confortPrev = sessionStorage.confort;
+            }
+            sessionStorage.setItem(sessionStorage.areaPersona, $("#maintext").html());
+            console.log(sessionStorage.getItem(sessionStorage.areaPersona));
+            sessionStorage.parts = sessionStorage.performance + "<br>" + sessionStorage.confort;
+            window.open("persona.html", "_self");
         }
         else{
             window.open($act.attr("href"), "_self");
@@ -236,7 +311,13 @@ $(function(){
 
     listener.simple_combo("left", function() {
         clearTimeout(msgTimer);
-        if(document.URL.match(/[^\/]+$/)[0] != "index.html"){
+        console.log(sessionStorage.personaAlt);
+        if(document.URL.match(/[^\/]+$/)[0] == "persona.html" && (sessionStorage.personaAlt == "true")){
+            sessionStorage.confirm = "Sair sem guardar?";
+            sessionStorage.msgAct = sessionStorage.parts;
+            window.open("agree.html", "_self");
+        }
+        else if(document.URL.match(/[^\/]+$/)[0] != "index.html"){
             window.history.back();
         }
     });

@@ -74,7 +74,7 @@
 	visibility: hidden;
 }
 
-.nav>li>a, .nav>li, .active{
+.nav>li>a, .nav>li, .active, #video{
 	-webkit-transition: all ease-in-out .3s; /* Safari and Chrome */
     -moz-transition: all ease-in-out .3s; /* Firefox */
     -ms-transition: all ease-in-out .3s; 
