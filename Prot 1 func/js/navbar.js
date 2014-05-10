@@ -74,6 +74,26 @@ function scroller($act, $fixedPos, $movingPos, id){
     });
 }
 
+function done(URL){
+    tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
+    $(".nav").hide();
+    $("#mainwindow").hide();
+    setTimeout(function(){
+        window.location.replace("index.html");
+        window.open(URL, "_self");
+    }, 2000);
+}
+
+function zoom(type){
+    ratio = (parseFloat($(".img").css("height")) / parseFloat($(".img").css("width")));
+    if(type === "in"){
+        $(".img").css({ height: parseFloat($(".img").css("height")) + ratio*5 + "px", width: parseFloat($(".img").css("width")) + ratio*5 + "px"});
+    }
+    else{
+        $(".img").css({ height: parseFloat($(".img").css("height")) - ratio*5 + "px", width: parseFloat($(".img").css("width")) - ratio*5 + "px"});
+    }
+}
+
 
 $(function(){
 
@@ -101,6 +121,9 @@ $(function(){
         }} );
     }
 
+    if(sessionStorage.help === "true"){
+        $("#helper").removeClass('noheight');
+    }
 
     $(".left-menu").on("changeAct", function(){
         var msg, help, txt, otherTxt;
@@ -123,19 +146,13 @@ $(function(){
         }
         else if($(this).hasClass("usestore-persona")){
             if($(this).attr("id") === "factory"){
-                sessionStorage.performance = sessionStorage.predefperformance;
-                sessionStorage.confort = sessionStorage.predefconfort;
-                sessionStorage.parts = sessionStorage.predefparts;
-                msg = $(this).data('msg'), help = $(this).data('help'), txt ="<p><b>Definições de fábrica:</b><br></p>" + sessionStorage.parts;
+                msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.msgAct = "<p><b>Definições de fábrica:</b><br></p>" + sessionStorage.predefparts;
             }
             else if(($(this).attr("id") === "pre") && sessionStorage.partsPrev !== undefined){
-                sessionStorage.performance = sessionStorage.partsPrev;
-                sessionStorage.confort = sessionStorage.performancePrev;
-                sessionStorage.parts = sessionStorage.confortPrev;
-                msg = $(this).data('msg'), help = $(this).data('help'), txt ="<p><b>Definições de anteriores:</b><br></p>" + sessionStorage.parts;
+                msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.msgAct = "<p><b>Definições anteriores:</b><br></p>" + sessionStorage.getItem(sessionStorage.areaPersona + "Prev");
             }
             else{
-                msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.getItem(sessionStorage.areaPersona);
+                msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.msgAct = sessionStorage.getItem(sessionStorage.areaPersona);
             }
         }
         else{
@@ -252,14 +269,57 @@ $(function(){
         clearTimeout(msgTimer);
         if(document.URL.match(/[^\/]+$/)[0] == "agree.html"){
             console.log($(".active").attr("id"));
+            console.log(window.history[0]);
             if($(".active").attr("id") === "sim"){
-                tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
-                $(".nav").hide();
-                $("#mainwindow").hide();
-                setTimeout(function(){
-                    window.open("index.html", "_self");
-                    window.location.replace("index.html");
-                }, 2000);
+                console.log(sessionStorage.confirm);
+                if(sessionStorage.confirm === "Sair sem guardar?" || sessionStorage.confirm === "Descartar alterações?"){
+                    //tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
+                    //$(".nav").hide();
+                    //$("#mainwindow").hide();
+                    //setTimeout(function(){
+                    sessionStorage.parts = sessionStorage.partsPrev;
+                    sessionStorage.performance = sessionStorage.performancePrev;
+                    sessionStorage.confort = sessionStorage.confortPrev;
+                    sessionStorage.personaAlt = "false";
+                    done("avpersona.html");
+                    //}, 2000);
+                }
+                else if(sessionStorage.confirm === "Restaurar definições de fábrica?"){
+                    //tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
+                    //$(".nav").hide();
+                    //$("#mainwindow").hide();
+                    //setTimeout(function(){
+                    sessionStorage.performance = sessionStorage.performancePrev = sessionStorage.predefperformance;
+                    sessionStorage.confort = sessionStorage.confortPrev = sessionStorage.predefconfort;
+                    sessionStorage.parts = sessionStorage.partsPrev = sessionStorage.predefparts;
+                    sessionStorage.personaAlt = "false";
+                    done("avpersona.html");
+                    //}, 2000);
+                }
+                else if(sessionStorage.confirm === "Guardar alterações?"){
+                    //tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
+                    //$(".nav").hide();
+                    //$("#mainwindow").hide();
+                    //setTimeout(function(){
+                    var $aux = $($.parseHTML("<div>" + sessionStorage.performance + "</div>"));
+                    $aux.find("span").find("b").contents().unwrap();
+                    sessionStorage.performance = sessionStorage.performancePrev = $aux.html();
+                    $aux = $($.parseHTML("<div>" + sessionStorage.confort + "</div>"));
+                    $aux.find("span").find("b").contents().unwrap();
+                    sessionStorage.confort = sessionStorage.confortPrev = $aux.html();
+                    $aux = $($.parseHTML("<div>" + sessionStorage.parts + "</div>"));
+                    $aux.find("span").find("b").contents().unwrap();
+                    sessionStorage.parts = sessionStorage.partsPrev = $aux.html();
+                    sessionStorage.personaAlt = "false";
+                    done("avpersona.html");
+                    //}, 2000);
+                }
+                else if(sessionStorage.confirm === "Sair do Kitt?"){
+                    done("login.html");
+                }
+                else{
+                    done("index.html");
+                }
             }
             else{
                 window.history.back();
@@ -303,6 +363,23 @@ $(function(){
             console.log(sessionStorage.getItem(sessionStorage.areaPersona));
             sessionStorage.parts = sessionStorage.performance + "<br>" + sessionStorage.confort;
             window.open("persona.html", "_self");
+        }
+        else if($(".active").attr("id") === "help"){
+            if($("#helper").hasClass('noheight')){
+                $("#helper").removeClass('noheight');
+                
+                sessionStorage.help = true;
+            }
+            else{
+                $("#helper").addClass('noheight');
+                sessionStorage.help = false;
+            }
+        }
+        else if($(".active").attr("id") === "zoom-in"){
+            zoom("in");
+        }
+        else if($(".active").attr("id") === "zoom-out"){
+            zoom("out");
         }
         else{
             window.open($act.attr("href"), "_self");
