@@ -205,8 +205,11 @@
 	/* margin-top: 15px; */
 	/* margin-bottom: 15px; */
 	vertical-align: top;
-	max-width: :100%;
-	max-height: 100%;
+	/* max-width: :100%; */
+	/* max-height: 100%; */
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
 	height: 260px;
 	width: auto;
 	overflow: hidden;

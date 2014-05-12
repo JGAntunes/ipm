@@ -43,9 +43,6 @@
 		  					<div id="top-arrow" class="arrows"><span class="glyphicon glyphicon-chevron-up scrollicon"></span></div>
 		  					<div class="roll-scroll">
 		  						<nav class="nav nav-pills nav-stacked nav-fixed-left text-center" role="navigation">
-							    	<li class="left-menu usestore-persona" data-msg="Favoritos" data-help="Consulte as várias configurações definidas por si" data-txt="">
-							    		<a class="nav-button" href="#"><span class="mainicon glyphicon glyphicon-star"></span></a>
-							    	</li >
 								    <li class="left-menu usestore-persona" data-msg="Conforto" data-help="Personalize os vários constituintes relaccionados com conforto (ajuste dos bancos, estofos, etc.)" data-txt="">
 								    	<a class="nav-button" href="conforto.html"><div class="icon" style="background-image: url(./imgs/icons/seat.png)"></div></a>
 								    </li>
@@ -55,14 +52,14 @@
 								    <li class="left-menu usestore-persona store-confirm" data-msg="Guardar alterações" data-help="Guardar as alterações até agora efectuadas no seu carro" data-confirm="Guardar alterações?">
 							    		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-floppy-disk"></span></a>
 							    	</li >
-							    	<li id="pre" class="left-menu usestore-persona store-confirm" data-msg="Descartar alterações" data-help="Descartar as alterações até agora efectuadas no seu carro" data-confirm="Descartar alterações?" style="opacity: 0; height: 0px">
-							    		<a id="bottom-elem" class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-trash"></span></a>
+							    	<li id="pre" class="left-menu usestore-persona store-confirm" data-msg="Descartar alterações" data-help="Descartar as alterações até agora efectuadas no seu carro" data-confirm="Descartar alterações?">
+							    		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-trash"></span></a>
 							    	</li >
-							    	<li id="factory" class="left-menu usestore-persona store-confirm" data-msg="Definições de fábrica" data-help="Restaurar os vários constituintes activos por defeito" data-confirm="Restaurar definições de fábrica?" style="opacity: 0; height: 0px">
-							    		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-repeat"></span></a>
+							    	<li id="factory" class="left-menu usestore-persona store-confirm" data-msg="Definições de fábrica" data-help="Restaurar os vários constituintes activos por defeito" data-confirm="Repor pré-definições?" style="opacity: 0; height: 0px">
+							    		<a id="bottom-elem" class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-repeat"></span></a>
 							    	</li >
-									<li class="left-menu" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="" style="opacity: 0; height: 0px">
-										<a class="nav-button" href="index.html"><span class="mainicon glyphicon glyphicon-home"></span></a>
+									<li id="main-menu" class="left-menu store-confirm" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="" style="opacity: 0; height: 0px" data-confirm="Sair sem guardar?">
+										<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-home"></span></a>
 									</li>
 									<li id="help" class="left-menu" data-msg="Ajuda" data-help="Consulte as várias opções para obter ajuda. Pode desactivar a ajuda seleccionando esta opção novamente" data-txt="" style="opacity: 0; height: 0px">
 										<a class="nav-button"><span class="mainicon glyphicon glyphicon-question-sign"></span></a>

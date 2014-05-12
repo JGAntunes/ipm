@@ -85,12 +85,27 @@ function done(URL){
 }
 
 function zoom(type){
-    ratio = (parseFloat($(".img").css("height")) / parseFloat($(".img").css("width")));
-    if(type === "in"){
-        $(".img").css({ height: parseFloat($(".img").css("height")) + ratio*5 + "px", width: parseFloat($(".img").css("width")) + ratio*5 + "px"});
+    var widthRatio = (parseFloat($(".img").css("width")) / parseFloat($(".img").css("height")));
+    var value = $(".img").css("background-size").split(" ")[1];
+    var newHeight, newWidth;
+    if(value == undefined){
+        value = parseFloat($(".img").css("width")) - 130;
     }
-    else{
-        $(".img").css({ height: parseFloat($(".img").css("height")) - ratio*5 + "px", width: parseFloat($(".img").css("width")) - ratio*5 + "px"});
+    console.log(value);
+    if(type === "in" && parseFloat(value) < parseFloat($(".img").css("width")) + 130){
+        newWidth = parseFloat(value) + widthRatio*4 + "px"
+        $(".img").css("background-size", "auto" + " " + newWidth);
+        sessionStorage.msgAct = $("#maintext").html();
+    }
+    else if( type === "out" && parseFloat(value) > parseFloat($(".img").css("width")) - 130) {
+        newWidth = parseFloat(value) - widthRatio*4 + "px"
+        $(".img").css("background-size", "auto" + " " + newWidth);
+        sessionStorage.msgAct = $("#maintext").html();
+    }
+    else if( type === "normal")
+    {
+        $(".img").css("background-size", "auto" + " " + parseFloat($(".img").css("width")) - 130 + "px");
+        sessionStorage.msgAct = $("#maintext").html();
     }
 }
 
@@ -212,6 +227,9 @@ $(function(){
 
     listener.simple_combo("up", function() {
         clearTimeout(msgTimer);
+        if($act.parent().attr("id") === "stop" && document.URL.match(/[^\/]+$/)[0] === "videoex.html"){
+            return;
+        }
         $act.parent().removeClass("active");
         $actside.parent().addClass("noact").removeClass("act");
         $nextAct = $act.parent().prev().children(".nav-button").eq(0);
@@ -239,10 +257,12 @@ $(function(){
 
     listener.simple_combo("down", function() {
         clearTimeout(msgTimer);
+        if($act.parent().attr("id") === "stop" && document.URL.match(/[^\/]+$/)[0] === "videoex.html"){
+            return;
+        }
         $act.parent().removeClass("active");
         $actside.parent().addClass("noact").removeClass("act");
         $nextAct = $act.parent().next().children(".nav-button").eq(0);
-
         if($nextAct.is("#bottom-elem")){
             $act = $nextAct;
             scroller($act, $("#top-elem").parent().next().children(".nav-button").eq(0), $act.parent().next().children(".nav-button").eq(0), "bottom-elem");
@@ -272,7 +292,7 @@ $(function(){
             console.log(window.history[0]);
             if($(".active").attr("id") === "sim"){
                 console.log(sessionStorage.confirm);
-                if(sessionStorage.confirm === "Sair sem guardar?" || sessionStorage.confirm === "Descartar alterações?"){
+                if(sessionStorage.confirm === "Sair sem guardar?"){
                     //tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
                     //$(".nav").hide();
                     //$("#mainwindow").hide();
@@ -281,10 +301,17 @@ $(function(){
                     sessionStorage.performance = sessionStorage.performancePrev;
                     sessionStorage.confort = sessionStorage.confortPrev;
                     sessionStorage.personaAlt = "false";
-                    done("avpersona.html");
+                    done("index.html");
                     //}, 2000);
                 }
-                else if(sessionStorage.confirm === "Restaurar definições de fábrica?"){
+                else if(sessionStorage.confirm === "Descartar alterações?"){
+                    sessionStorage.parts = sessionStorage.partsPrev;
+                    sessionStorage.performance = sessionStorage.performancePrev;
+                    sessionStorage.confort = sessionStorage.confortPrev;
+                    sessionStorage.personaAlt = "false";
+                    done("avpersona.html");
+                }
+                else if(sessionStorage.confirm === "Repor pré-definições?"){
                     //tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
                     //$(".nav").hide();
                     //$("#mainwindow").hide();
@@ -293,7 +320,7 @@ $(function(){
                     sessionStorage.confort = sessionStorage.confortPrev = sessionStorage.predefconfort;
                     sessionStorage.parts = sessionStorage.partsPrev = sessionStorage.predefparts;
                     sessionStorage.personaAlt = "false";
-                    done("avpersona.html");
+                    done("index.html");
                     //}, 2000);
                 }
                 else if(sessionStorage.confirm === "Guardar alterações?"){
@@ -311,7 +338,7 @@ $(function(){
                     $aux.find("span").find("b").contents().unwrap();
                     sessionStorage.parts = sessionStorage.partsPrev = $aux.html();
                     sessionStorage.personaAlt = "false";
-                    done("avpersona.html");
+                    done("index.html");
                     //}, 2000);
                 }
                 else if(sessionStorage.confirm === "Sair do Kitt?"){
@@ -381,6 +408,46 @@ $(function(){
         else if($(".active").attr("id") === "zoom-out"){
             zoom("out");
         }
+        else if($(".active").attr("id") === "zoom"){
+            zoom("normal");
+        }
+        else if($(".active").attr("id") === "photo"){
+            $(".img").animate({
+                opacity: 0},
+                100, function() {
+                    $(".img").css("background-image", $(".img").css("background-image").replace(/.gif/g, 'pic.jpg'));
+                    $(".img").animate({
+                    opacity: 1},
+                    100, function() {
+                        setTimeout(function(){
+                            sessionStorage.msgAct = $("#maintext").html();
+                            window.location.replace("galeria.html");
+                            window.open("photo.html", "_self");
+                        }, 1500);
+                    });
+                });
+        }
+        else if(document.URL.match(/[^\/]+$/)[0] == "videoex.html"){ 
+            if($(".active").attr("id") === "rec"){
+                $(".rec").css("visibility", "visible");
+                $("#alter").addClass("glyphicon-stop").removeClass("glyphicon-record");
+                $(".active").attr("id", "stop");
+                //$("#video").css("opacity", "1");
+                tittleChanger("Parar","Parar a gravação no momento em questão", $("#maintext").html());
+                $("#sidebar").css("height", "90px");
+            }
+            else if($(".active").attr("id") === "stop"){
+                $(".rec").css("visibility", "hidden");
+                $("#alter").addClass("glyphicon-record").removeClass("glyphicon-stop");
+                $(".active").attr("id", "rec");
+                //$("#video").css("opacity", "1");
+                tittleChanger("Gravar","Continuar a gravação", $("#maintext").html());
+                $("#sidebar").css("height", "300");
+            }
+            else{
+                window.open($act.attr("href"), "_self");
+            }
+        }
         else{
             window.open($act.attr("href"), "_self");
         }
@@ -388,6 +455,9 @@ $(function(){
 
     listener.simple_combo("left", function() {
         clearTimeout(msgTimer);
+        if($act.parent().attr("id") === "stop" && document.URL.match(/[^\/]+$/)[0] === "videoex.html"){
+            return;
+        }
         console.log(sessionStorage.personaAlt);
         if(document.URL.match(/[^\/]+$/)[0] == "persona.html" && (sessionStorage.personaAlt == "true")){
             sessionStorage.confirm = "Sair sem guardar?";
