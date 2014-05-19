@@ -161,7 +161,7 @@ $(function(){
             if($(this).attr("id") === "factory"){
                 msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.msgAct = "<p><b>Definições de fábrica:</b><br></p>" + sessionStorage.predefparts;
             }
-            else if(($(this).attr("id") === "pre") && sessionStorage.partsPrev !== undefined){
+            else if(($(this).attr("id") === "pre") && sessionStorage.partsPrev !== "undefined"){
                 msg = $(this).data('msg'), help = $(this).data('help'), txt = sessionStorage.msgAct = "<p><b>Definições anteriores:</b><br></p>" + sessionStorage.getItem(sessionStorage.areaPersona + "Prev");
             }
             else{
@@ -466,16 +466,19 @@ $(function(){
         }
         console.log(sessionStorage.personaAlt);
         if(document.URL.match(/[^\/]+$/)[0] == "persona.html" && (sessionStorage.personaAlt == "true")){
+            sessionStorage.backconf = "avpersona.html";
             sessionStorage.confirm = "Sair sem guardar?";
             sessionStorage.msgAct = sessionStorage.parts;
             window.open("agree.html", "_self");
         }
         else if(document.URL.match(/[^\/]+$/)[0] == "newphoto.html"){
+            sessionStorage.backconf = "activecam.html";
             sessionStorage.confirm = "Sair sem guardar?";
             window.open("agree.html", "_self");
         }
         else if(document.URL.match(/[^\/]+$/)[0] == "videoex.html"){
-            sessionStorage.confirm = "Sair sem guardar?";
+            sessionStorage.confirm  = "Sair sem guardar?";
+            sessionStorage.backconf = "activecam.html"
             window.open("agree.html", "_self");
         }
         else if(document.URL.match(/[^\/]+$/)[0] != "index.html"){
