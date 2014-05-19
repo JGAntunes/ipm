@@ -11,6 +11,7 @@
 	<script src="js/keypress-2.0.1.min.js"></script>
 	<script src="js/navbar.js"></script>
 	<script> sessionStorage.areaPersona = "parts" </script>
+	<script> sessionStorage.backURL = "avpersona.html"</script>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -49,16 +50,16 @@
 								    <li class="left-menu usestore-persona" data-msg="Performance" data-help="Personalize os vários constituintes relaccionados com a performance do seu veículo (motor, suspensão, direcção, etc.)" data-txt="">
 								    	<a class="nav-button" href="performance.html"><div class="icon" style="background-image: url(./imgs/icons/performance2.png)"></div></a>
 								    </li>
-								    <li class="left-menu usestore-persona store-confirm" data-msg="Guardar alterações" data-help="Guardar as alterações até agora efectuadas no seu carro" data-confirm="Guardar alterações?">
+								    <li class="left-menu usestore-persona store-confirm" data-msg="Guardar alterações" data-help="Guardar as alterações até agora efectuadas no seu carro" data-confirm="Guardar alterações?" data-backconf="avpersona.html">
 							    		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-floppy-disk"></span></a>
 							    	</li >
-							    	<li id="pre" class="left-menu usestore-persona store-confirm" data-msg="Descartar alterações" data-help="Descartar as alterações até agora efectuadas no seu carro" data-confirm="Descartar alterações?">
+							    	<li id="pre" class="left-menu usestore-persona store-confirm" data-msg="Descartar alterações" data-help="Descartar as alterações até agora efectuadas no seu carro" data-confirm="Descartar alterações?" data-backconf="persona.html">
 							    		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-trash"></span></a>
 							    	</li >
-							    	<li id="factory" class="left-menu usestore-persona store-confirm" data-msg="Definições de fábrica" data-help="Restaurar os vários constituintes activos por defeito" data-confirm="Repor pré-definições?" style="opacity: 0; height: 0px">
+							    	<li id="factory" class="left-menu usestore-persona store-confirm" data-msg="Definições de fábrica" data-help="Restaurar os vários constituintes activos por defeito" data-confirm="Repor pré-definições?" data-backconf="persona.html" style="opacity: 0; height: 0px">
 							    		<a id="bottom-elem" class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-repeat"></span></a>
 							    	</li >
-									<li id="main-menu" class="left-menu store-confirm" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="" style="opacity: 0; height: 0px" data-confirm="Sair sem guardar?">
+									<li id="main-menu" class="left-menu store-confirm" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="" style="opacity: 0; height: 0px" data-confirm="Sair sem guardar?" data-backconf="index.html">
 										<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-home"></span></a>
 									</li>
 									<li id="help" class="left-menu" data-msg="Ajuda" data-help="Consulte as várias opções para obter ajuda. Pode desactivar a ajuda seleccionando esta opção novamente" data-txt="" style="opacity: 0; height: 0px">

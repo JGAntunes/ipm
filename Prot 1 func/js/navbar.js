@@ -74,13 +74,12 @@ function scroller($act, $fixedPos, $movingPos, id){
     });
 }
 
-function done(URL){
+function done(func){
     tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
     $(".nav").hide();
     $("#mainwindow").hide();
     setTimeout(function(){
-        window.location.replace("index.html");
-        window.open(URL, "_self");
+        func();
     }, 2000);
 }
 
@@ -108,7 +107,6 @@ function zoom(type){
         sessionStorage.msgAct = $("#maintext").html();
     }
 }
-
 
 $(function(){
 
@@ -182,6 +180,7 @@ $(function(){
         }
         else if($(this).hasClass("store-confirm")){
             sessionStorage.confirm = $(this).data('confirm');
+            sessionStorage.backconf = $(this).data('backconf');
         }
         else if($(this).hasClass("store-persona")){
             console.log(sessionStorage.areaPersona);
@@ -297,11 +296,11 @@ $(function(){
                     //$(".nav").hide();
                     //$("#mainwindow").hide();
                     //setTimeout(function(){
+                    sessionStorage.msgAct = sessionStorage.msgAct.replace("pic.jpg", ".gif");
                     sessionStorage.parts = sessionStorage.partsPrev;
                     sessionStorage.performance = sessionStorage.performancePrev;
                     sessionStorage.confort = sessionStorage.confortPrev;
                     sessionStorage.personaAlt = "false";
-                    done("index.html");
                     //}, 2000);
                 }
                 else if(sessionStorage.confirm === "Descartar alterações?"){
@@ -309,7 +308,6 @@ $(function(){
                     sessionStorage.performance = sessionStorage.performancePrev;
                     sessionStorage.confort = sessionStorage.confortPrev;
                     sessionStorage.personaAlt = "false";
-                    done("avpersona.html");
                 }
                 else if(sessionStorage.confirm === "Repor pré-definições?"){
                     //tittleChanger("Efectuado", "Operação efectuada com sucesso!", "");
@@ -320,7 +318,6 @@ $(function(){
                     sessionStorage.confort = sessionStorage.confortPrev = sessionStorage.predefconfort;
                     sessionStorage.parts = sessionStorage.partsPrev = sessionStorage.predefparts;
                     sessionStorage.personaAlt = "false";
-                    done("index.html");
                     //}, 2000);
                 }
                 else if(sessionStorage.confirm === "Guardar alterações?"){
@@ -338,15 +335,14 @@ $(function(){
                     $aux.find("span").find("b").contents().unwrap();
                     sessionStorage.parts = sessionStorage.partsPrev = $aux.html();
                     sessionStorage.personaAlt = "false";
-                    done("index.html");
                     //}, 2000);
                 }
-                else if(sessionStorage.confirm === "Sair do Kitt?"){
-                    done("login.html");
+                else if(sessionStorage.confirm === "Guardar foto?" || sessionStorage.confirm === "Apagar foto?"){
+                    sessionStorage.msgAct = sessionStorage.msgAct.replace("pic.jpg", ".gif");
                 }
-                else{
-                    done("index.html");
-                }
+                done(function(){
+                    window.open(sessionStorage.backconf, "_self");
+                });
             }
             else{
                 window.history.back();
@@ -364,16 +360,18 @@ $(function(){
             else if($(".active").attr("id") === "pause"){
                 $(".glyphicon-pause").addClass("glyphicon-play").removeClass("glyphicon-pause");
                 $(".active").attr("id", "play");
-                $("#video").css("opacity", "0.6");
                 tittleChanger("Reproduzir","Reproduzir o vídeo", sessionStorage.msgAct);
                 video.pause();
             }
             else if($(".active").attr("id") === "stop"){
                 $(".glyphicon-pause").addClass("glyphicon-play").removeClass("glyphicon-pause");
                 $("#play").attr("id", "pause");
-                $("#video").css("opacity", "0.6");
                 video.pause();
                 video.currentTime = 0;
+            }
+            else if($(".active").hasClass('store-confirm')){
+                sessionStorage.backURL = undefined;
+                window.open($act.attr("href"), "_self");
             }
             else{
                 window.open($act.attr("href"), "_self");
@@ -422,7 +420,7 @@ $(function(){
                         setTimeout(function(){
                             sessionStorage.msgAct = $("#maintext").html();
                             window.location.replace("galeria.html");
-                            window.open("photo.html", "_self");
+                            window.open("newphoto.html", "_self");
                         }, 1500);
                     });
                 });
@@ -444,9 +442,17 @@ $(function(){
                 tittleChanger("Gravar","Continuar a gravação", $("#maintext").html());
                 $("#sidebar").css("height", "300");
             }
+            else if($(".active").hasClass('store-confirm')){
+                sessionStorage.backURL = undefined;
+                window.open($act.attr("href"), "_self");
+            }
             else{
                 window.open($act.attr("href"), "_self");
             }
+        }
+        else if($(".active").hasClass('store-confirm')){
+            sessionStorage.backURL = undefined;
+            window.open($act.attr("href"), "_self");
         }
         else{
             window.open($act.attr("href"), "_self");
@@ -464,8 +470,21 @@ $(function(){
             sessionStorage.msgAct = sessionStorage.parts;
             window.open("agree.html", "_self");
         }
+        else if(document.URL.match(/[^\/]+$/)[0] == "newphoto.html"){
+            sessionStorage.confirm = "Sair sem guardar?";
+            window.open("agree.html", "_self");
+        }
+        else if(document.URL.match(/[^\/]+$/)[0] == "videoex.html"){
+            sessionStorage.confirm = "Sair sem guardar?";
+            window.open("agree.html", "_self");
+        }
         else if(document.URL.match(/[^\/]+$/)[0] != "index.html"){
-            window.history.back();
+            if(sessionStorage.backURL != "undefined"){
+                window.open(sessionStorage.backURL, "_self");
+            }
+            else{
+                window.history.back();
+            }
         }
     });
 });

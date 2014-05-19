@@ -10,7 +10,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/keypress-2.0.1.min.js"></script>
 	<script src="js/navbar.js"></script>
-	<script>sessionStorage.backURL = "selectcams.html";</script>
+	<script> sessionStorage.backURL = "activecam.html"</script>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 		  		<div class="col-md-3">
 		  			<div class="row">
 		  				<div class="col-md-12 box" id="maintittle">
-		  					<h1 class= "width act maintext">Câmaras<br> <small>Câmara activa</small></h1>
+		  					<h1 class= "width act maintext">Câmara<br> <small>Foto</small></h1>
 		  				</div>
 		  			</div>
 		  			<div class="row top-buffer">
@@ -39,27 +39,27 @@
 			  			</div>
 		  			</div>
 		  			<div class="row">
-		  				<div id="sidebar" class="col-md-8 box smallpadding" style="height: 300px">
+	  					<div id="sidebar" class="col-md-8 box smallpadding" style="height: 300px">
 		  					<div id="top-arrow" class="arrows"><span class="glyphicon glyphicon-chevron-up scrollicon"></span></div>
 		  					<div class="roll-scroll">
 							    <nav class="nav nav-pills nav-stacked nav-fixed-left nav-inverse text-center" role="navigation">
-							    	<li id="photo" class="left-menu usestore" data-msg="Fotografar" data-help="Tirar uma fotografia da câmara activa">
-								      	<a class="nav-button"><span class="mainicon glyphicon glyphicon-camera"></span></a>
-								    </li>
-								  	<li class="left-menu usestore" data-msg="Gravar" data-help="Gravar um vídeo da câmara activa">
-								  		<a class="nav-button" href="videoex.html"><span class="mainicon glyphicon glyphicon-facetime-video"></span></a>
+								  	<li class="left-menu usestore store-confirm" data-msg="Partilhar" data-help="Partilhar a foto na nuvem Kitt" data-confirm="Partilhar foto?" data-backconf="newphoto.html">
+								  		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-cloud"></span></a>
 								  	</li>
-								  	<li class="left-menu usestore" data-msg="Ampliar" data-help="Ampliar a imagem da câmara activa">
-								  		<a class="nav-button" href="zoom.html"><span class="mainicon glyphicon glyphicon-search"></span></a>
+								  	<li class="left-menu usestore store-confirm" data-msg="Guardar foto" data-help="Guardar a foto na galeria de fotos e vídeos" data-confirm="Guardar foto?" data-backconf="activecam.html">
+								  		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-floppy-disk"></span></a>
 								  	</li>
-								  	<li class="left-menu" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="">
-										<a class="nav-button" href="index.html"><span class="mainicon glyphicon glyphicon-home"></span></a>
+								  	<li class="left-menu usestore store-confirm" data-msg="Apagar" data-help="Apagar a foto da galeria" data-confirm="Apagar foto?" data-backconf="activecam.html">
+								  		<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-trash"></span></a>
+								  	</li>
+								  	<li class="left-menu usestore store-confirm" data-msg="Menu principal" data-help="Voltar ao menu principal" data-txt="" data-confirm="Sair sem guardar?" data-backconf="index.html">
+										<a class="nav-button" href="agree.html"><span class="mainicon glyphicon glyphicon-home"></span></a>
 									</li>
 									<li id="help" class="left-menu" data-msg="Ajuda" data-help="Consulte as várias opções para obter ajuda. Pode desactivar a ajuda seleccionando esta opção novamente" data-txt="" style="opacity: 0; height: 0px">
 										<a id="bottom-elem" class="nav-button"><span class="mainicon glyphicon glyphicon-question-sign"></span></a>
 									</li>
 							    </nav>
-						    </div>
+							</div>
 							<div id="bottom-arrow" class="arrows"><span class="glyphicon glyphicon-chevron-down scrollicon"></span></div>
 						</div>
 						<div class="col-md-4 padding2 top-buffer20">
@@ -76,14 +76,14 @@
 								<li class="noact width">
 									<blockquote class=" side mainicon glyphicon glyphicon-ok-circle"></blockquote>
 								</li>
-							</ul>
+							</ul>..
 						</div>
 		  			</div>
 		  		</div>
 		  		<div class="col-md-9">
 		  			<div class="row">
 		  				<div class="col-md-5 col-md-offset-1 box smallpadding noheight" id="helper">
-		  					<h4 class="maintext width noact" id="helperfunc"></h4>
+		  					<h4 class="maintext width act" id="helperfunc"></h4>
 		  				</div>
 		  			</div>
 		  			<div class="row top-buffer-main">
